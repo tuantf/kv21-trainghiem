@@ -1,65 +1,251 @@
-import Image from "next/image";
+'use client'
 
-export default function Home() {
+import React, { useRef } from 'react'
+import SimpleMarquee from '@/components/fancy/blocks/simple-marquee'
+import { motion } from 'motion/react'
+import { initial, animate, transition } from '@/libs/motion'
+import { cn } from '@/libs/utils'
+import { Inter, IBM_Plex_Serif } from 'next/font/google'
+import { ArrowDown } from 'lucide-react'
+import Link from 'next/link'
+import Image from 'next/image'
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+})
+
+const ibm_plex_serif = IBM_Plex_Serif({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+})
+
+const MarqueeItem = ({ children }: { children: React.ReactNode }) => (
+  <div className="mx-2 cursor-pointer duration-300 ease-in-out hover:scale-105 sm:mx-3 md:mx-4">
+    {children}
+  </div>
+)
+
+export default function Page() {
+  const images = [
+    '/1.avif',
+    '/2.avif',
+    '/3.avif',
+    '/4.avif',
+    '/5.avif',
+    '/6.avif',
+    '/7.avif',
+    '/8.avif',
+    '/9.avif',
+    '/10.avif',
+    '/11.avif',
+    '/12.avif',
+    '/13.avif',
+    '/14.avif',
+    '/15.avif',
+  ]
+  const firstThird = images.slice(0, Math.floor(images.length / 3))
+  const secondThird = images.slice(
+    Math.floor(images.length / 3),
+    Math.floor((2 * images.length) / 3),
+  )
+  const lastThird = images.slice(Math.floor((2 * images.length) / 3))
+
+  const container = useRef<HTMLDivElement>(null)
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="flex flex-col">
+      <div
+        className="relative flex min-h-screen w-dvw flex-col items-center justify-center overflow-x-hidden overflow-y-auto bg-white"
+        ref={container}
+        style={{
+          backgroundImage: `radial-gradient(circle, #d1d5db8c 1px, transparent 1px)`,
+          backgroundSize: '24px 24px',
+        }}
+      >
+        <>
+          <motion.div
+            initial={initial}
+            animate={animate}
+            transition={transition}
+            className={cn(
+              ibm_plex_serif.className,
+              'md:text-md ht absolute top-0 z-10 mt-8 flex items-center justify-center text-center text-sm',
+            )}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <div className="relative mr-3 h-10 w-10">
+              <Image src="/pccc.avif" alt="logo" className="object-cover" fill />
+            </div>
+            <div>
+              <p className="text-xs md:text-sm">PHÒNG CẢNH SÁT PCCC&CNCH</p>
+              <p className="text-md leading-tight font-bold tracking-tight md:text-lg">
+                ĐỘI CC&CNCH KHU VỰC SỐ 21
+              </p>
+            </div>
+          </motion.div>
+          <motion.h1
+            initial={initial}
+            animate={animate}
+            transition={transition}
+            className={cn(
+              inter.className,
+              'absolute top-1/6 z-10 px-2 text-center text-3xl leading-tight font-bold tracking-tight sm:text-5xl md:-mt-4 md:text-6xl',
+            )}
           >
-            Documentation
-          </a>
-        </div>
-      </main>
+            Chương trình tuyên truyền, <br /> trải nghiệm, thực hành <br />
+            <span className={cn(ibm_plex_serif.className, 'font-medium italic')}>
+              <span className="text-signature-orange/80">chữa cháy</span> và{' '}
+              <span className="text-signature-blue/80">cứu nạn cứu hộ</span>
+            </span>
+          </motion.h1>
+          <motion.p
+            initial={initial}
+            animate={animate}
+            transition={transition}
+            className={cn(
+              ibm_plex_serif.className,
+              'z-10 -mt-16 max-w-2xl px-2 text-center text-sm italic md:mt-8 md:text-lg',
+            )}
+          >
+            &quot;Chương trình trải nghiệm thực tế mang đến kiến thức, kỹ năng bổ ích về phòng cháy,
+            chữa cháy, cứu nạn, cứu hộ cùng nhiều hoạt động thú vị&quot;
+          </motion.p>
+
+          <motion.div
+            initial={initial}
+            animate={animate}
+            transition={transition}
+            className="absolute top-0 z-0 flex h-[170%] w-full flex-col items-center justify-center space-y-2 sm:h-[200%] sm:space-y-3 md:space-y-4"
+            style={{
+              maskImage: 'linear-gradient(to right, transparent, black 1%, black 99%, transparent)',
+              WebkitMaskImage:
+                'linear-gradient(to right, transparent, black 1%, black 99%, transparent)',
+            }}
+          >
+            <SimpleMarquee
+              className="w-full"
+              baseVelocity={4}
+              repeat={4}
+              draggable={false}
+              scrollSpringConfig={{ damping: 50, stiffness: 400 }}
+              slowDownFactor={0.1}
+              slowdownOnHover
+              slowDownSpringConfig={{ damping: 60, stiffness: 300 }}
+              scrollAwareDirection={true}
+              scrollContainer={container}
+              useScrollVelocity={true}
+              direction="left"
+            >
+              {firstThird.map((src, i) => (
+                <MarqueeItem key={i}>
+                  <Image
+                    src={src}
+                    alt={`Image ${i + 1}`}
+                    width={1600}
+                    height={900}
+                    className="h-27 w-48 rounded-lg object-cover sm:h-36 sm:w-64 md:h-45 md:w-80"
+                  />
+                </MarqueeItem>
+              ))}
+            </SimpleMarquee>
+
+            <SimpleMarquee
+              className="w-full"
+              baseVelocity={4}
+              repeat={4}
+              scrollAwareDirection={true}
+              scrollSpringConfig={{ damping: 50, stiffness: 400 }}
+              slowdownOnHover
+              slowDownFactor={0.1}
+              slowDownSpringConfig={{ damping: 60, stiffness: 300 }}
+              useScrollVelocity={true}
+              scrollContainer={container}
+              draggable={false}
+              direction="right"
+            >
+              {secondThird.map((src, i) => (
+                <MarqueeItem key={i}>
+                  <Image
+                    src={src}
+                    alt={`Image ${i + firstThird.length}`}
+                    width={1600}
+                    height={900}
+                    className="h-27 w-48 rounded-lg object-cover sm:h-27 sm:w-48 md:h-45 md:w-80"
+                  />
+                </MarqueeItem>
+              ))}
+            </SimpleMarquee>
+
+            <SimpleMarquee
+              className="w-full"
+              baseVelocity={4}
+              repeat={4}
+              draggable={false}
+              scrollSpringConfig={{ damping: 50, stiffness: 400 }}
+              slowDownFactor={0.1}
+              slowdownOnHover
+              slowDownSpringConfig={{ damping: 60, stiffness: 300 }}
+              scrollAwareDirection={true}
+              scrollContainer={container}
+              useScrollVelocity={true}
+              direction="left"
+            >
+              {lastThird.map((src, i) => (
+                <MarqueeItem key={i}>
+                  <Image
+                    src={src}
+                    alt={`Image ${i + firstThird.length + secondThird.length}`}
+                    width={1600}
+                    height={900}
+                    className="h-27 w-48 rounded-lg object-cover sm:h-27 sm:w-48 md:h-45 md:w-80"
+                  />
+                </MarqueeItem>
+              ))}
+            </SimpleMarquee>
+          </motion.div>
+          <motion.div
+            initial={initial}
+            animate={animate}
+            transition={{ ...transition, delay: 0.2 }}
+            className={cn(
+              'absolute top-[120%] z-10 flex h-30 w-full items-center justify-between px-4 md:top-[158%] md:h-40 xl:w-2/5',
+              ibm_plex_serif.className,
+            )}
+          >
+            <div className="flex h-full flex-1 flex-col items-start justify-between gap-1.5">
+              <div className="group flex items-center gap-2 text-sm font-medium md:text-xl">
+                Đăng ký tham gia chương trình
+                <ArrowDown className="size-4 transition-transform duration-300 group-hover:translate-y-2 md:translate-y-0.5" />
+              </div>
+              <p className="text-[10.5px] md:text-sm">
+                <span>
+                  Liên hệ: đồng chí Đại uý Trần Quốc Bình - Cán bộ <br />
+                  Đội CC&CNCH khu vực số 21
+                </span>
+              </p>
+              <p className="text-[10.5px] md:text-sm">SĐT: 0398.217.095</p>
+              <p className="text-[10.5px] md:text-sm">
+                <span>
+                  Địa chỉ: Trụ sở Đội CC&CNCH khu vực số 21 - <br />
+                  Số 9, đường Đại Thịnh, xã Quang Minh, TP Hà Nội
+                </span>
+              </p>
+            </div>
+            <Link
+              href="https://maps.app.goo.gl/hPzAMmZQ6kCj2t9Z9"
+              target="_blank"
+              prefetch={false}
+              className="rounded-lg"
+            >
+              <div className="relative aspect-square h-26 w-26 rounded-lg md:h-40 md:w-40">
+                <Image src="/station.avif" alt="pccc" fill />
+              </div>
+            </Link>
+          </motion.div>
+        </>
+      </div>
     </div>
-  );
+  )
 }
